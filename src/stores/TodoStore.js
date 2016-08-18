@@ -2,26 +2,7 @@ import { EventEmitter } from 'events'
 import AppDispatcher from '../AppDispatcher'
 import uuid from 'uuid';
 
-let _todos = [
-  {
-    _id: 1,
-    task: 'do stuff',
-    createdAt: Date.now(),
-    isComplete: false
-  },
-  {
-    _id: 2,
-    task: 'do more stuff',
-    createdAt: Date.now(),
-    isComplete: true
-  },
-  {
-    _id: 3,
-    task: 'do more stuffier stuff',
-    createdAt: Date.now(),
-    isComplete: false
-  }
-];
+let _todos = [];
 
 class TodoStore extends EventEmitter {
   constructor() {
@@ -33,8 +14,13 @@ class TodoStore extends EventEmitter {
           _todos = action.todos;
           this.emit('CHANGE');
           break;
+        case 'RECEIVE_ONE_TODO':
+          var { todo } = action;
+          _todos.push(todo);
+          this.emit('CHANGE');
+          break;
         case 'CREATE_TODO':
-          let { todo } = action;
+          var { todo } = action;
 
           todo._id = uuid();
           todo.createdAt = Date.now();

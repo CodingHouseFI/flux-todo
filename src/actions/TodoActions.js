@@ -1,11 +1,9 @@
-import AppDispatcher from '../AppDispatcher'
+import API from '../API'
 
 const TodoActions = {
+  getAllTodos: API.getAllTodos,
   createTodo(todo) {
-    AppDispatcher.dispatch({
-      type: 'CREATE_TODO',
-      todo
-    })
+    API.createTodo(todo);
   }
 }
 

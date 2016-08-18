@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ListItem from './ListItem'
 import TodoStore from '../stores/TodoStore'
+import TodoActions from '../actions/TodoActions'
 
 export default class TodoList extends Component {
   constructor() {
@@ -14,6 +15,7 @@ export default class TodoList extends Component {
   }
 
   componentDidMount() {
+    TodoActions.getAllTodos();
     TodoStore.startListening(this._onChange);
   }
 
